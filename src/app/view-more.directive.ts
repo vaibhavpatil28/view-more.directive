@@ -1,28 +1,30 @@
-import { Directive, ElementRef, OnInit, AfterViewInit, Output, Input, EventEmitter, OnDestroy } from '@angular/core';
+import { Directive, ElementRef, OnInit, Output, Input, EventEmitter, OnDestroy, AfterViewChecked, SimpleChanges } from '@angular/core';
 
 @Directive({
   selector: '[view-more]'
 })
-export class ViewMoreDirective implements OnInit, AfterViewInit, OnDestroy {
+export class ViewMoreDirective implements OnInit, AfterViewChecked, OnDestroy {
   private element: HTMLInputElement;
   @Input() viewHeight: number;
   @Output() showMore = new EventEmitter<boolean>()
   toggleShowMore = false;
   actualHeight: number;
-
+  private isInsertedViewMoreBtn = false;
   constructor(private elRef: ElementRef) {
     //elRef will get a reference to the element where
     //the directive is placed
     this.element = elRef.nativeElement;
   }
-
+  ngOnChanges(changes: SimpleChanges) {
+    // console.log('changes',changes);
+  }
   ngOnInit() {
     console.log('height equal', this.viewHeight, this.element.offsetHeight);
   }
-  ngAfterViewInit() {
+  ngAfterViewChecked() {
     this.actualHeight = this.element.offsetHeight + 10;
-    if (this.element.offsetHeight > this.viewHeight) {
-      let btnName = 'view More...'
+    if (!this.isInsertedViewMoreBtn && (this.element.offsetHeight > this.viewHeight)) {
+      let btnName = 'view More...';
       console.log('height equal');
 
       let para = document.createElement("p");
@@ -34,14 +36,8 @@ export class ViewMoreDirective implements OnInit, AfterViewInit, OnDestroy {
       span.setAttribute(`id`, `text_view`);
       span.setAttribute('style', 'cursor:pointer;')
       this.element.parentNode.insertBefore(para, this.element.nextSibling)
-      this.toggleEventOnViewMore(span)
-      setTimeout(() => {
-        this.showMore.emit(true);
-      }, 1000)
-    }
-    else {
-      console.log('height not equal');
-      this.showMore.emit(false);
+      this.toggleEventOnViewMore(span);
+      this.isInsertedViewMoreBtn = true;
     }
   }
   toggleEventOnViewMore(element: HTMLElement) {
@@ -69,11 +65,13 @@ export class ViewMoreDirective implements OnInit, AfterViewInit, OnDestroy {
         this.element.classList.remove("view_more");
         document.getElementById('text_view').innerHTML = 'view more...';
         this.toggleShowMore = !this.toggleShowMore;
+        this.showMore.emit(false);
       } else {
         console.log('viewmore');
         document.getElementById('text_view').innerHTML = 'view less...';
         this.element.classList.add("view_more");
         this.toggleShowMore = !this.toggleShowMore;
+        this.showMore.emit(true);
       }
     })
   }

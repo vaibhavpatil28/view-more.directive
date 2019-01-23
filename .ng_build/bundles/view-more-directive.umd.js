@@ -1,8 +1,8 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/platform-browser'), require('@angular/core')) :
-	typeof define === 'function' && define.amd ? define(['exports', '@angular/platform-browser', '@angular/core'], factory) :
-	(factory((global['view-more-directive'] = {}),global.ng.platformBrowser,global.ng.core));
-}(this, (function (exports,platformBrowser,core) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core')) :
+	typeof define === 'function' && define.amd ? define(['exports', '@angular/core'], factory) :
+	(factory((global['view-more-directive'] = {}),global.ng.core));
+}(this, (function (exports,core) { 'use strict';
 
 var AppComponent = /** @class */ (function () {
     function AppComponent() {
@@ -29,10 +29,18 @@ var ViewMoreDirective = /** @class */ (function () {
         this.elRef = elRef;
         this.showMore = new core.EventEmitter();
         this.toggleShowMore = false;
+        this.isInsertedViewMoreBtn = false;
         //elRef will get a reference to the element where
         //the directive is placed
         this.element = elRef.nativeElement;
     }
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
+    ViewMoreDirective.prototype.ngOnChanges = function (changes) {
+        // console.log('changes',changes);
+    };
     /**
      * @return {?}
      */
@@ -42,10 +50,9 @@ var ViewMoreDirective = /** @class */ (function () {
     /**
      * @return {?}
      */
-    ViewMoreDirective.prototype.ngAfterViewInit = function () {
-        var _this = this;
+    ViewMoreDirective.prototype.ngAfterViewChecked = function () {
         this.actualHeight = this.element.offsetHeight + 10;
-        if (this.element.offsetHeight > this.viewHeight) {
+        if (!this.isInsertedViewMoreBtn && (this.element.offsetHeight > this.viewHeight)) {
             var /** @type {?} */ btnName = 'view More...';
             console.log('height equal');
             var /** @type {?} */ para = document.createElement("p");
@@ -58,13 +65,7 @@ var ViewMoreDirective = /** @class */ (function () {
             span.setAttribute('style', 'cursor:pointer;');
             this.element.parentNode.insertBefore(para, this.element.nextSibling);
             this.toggleEventOnViewMore(span);
-            setTimeout(function () {
-                _this.showMore.emit(true);
-            }, 1000);
-        }
-        else {
-            console.log('height not equal');
-            this.showMore.emit(false);
+            this.isInsertedViewMoreBtn = true;
         }
     };
     /**
@@ -87,12 +88,14 @@ var ViewMoreDirective = /** @class */ (function () {
                 _this.element.classList.remove("view_more");
                 document.getElementById('text_view').innerHTML = 'view more...';
                 _this.toggleShowMore = !_this.toggleShowMore;
+                _this.showMore.emit(false);
             }
             else {
                 console.log('viewmore');
                 document.getElementById('text_view').innerHTML = 'view less...';
                 _this.element.classList.add("view_more");
                 _this.toggleShowMore = !_this.toggleShowMore;
+                _this.showMore.emit(true);
             }
         });
     };
@@ -119,6 +122,7 @@ ViewMoreDirective.propDecorators = {
     'viewHeight': [{ type: core.Input },],
     'showMore': [{ type: core.Output },],
 };
+// import { BrowserModule } from '@angular/platform-browser';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -130,9 +134,7 @@ AppModule.decorators = [
                     AppComponent,
                     ViewMoreDirective
                 ],
-                imports: [
-                    platformBrowser.BrowserModule
-                ],
+                imports: [],
                 exports: [ViewMoreDirective],
                 providers: [],
                 bootstrap: [AppComponent]

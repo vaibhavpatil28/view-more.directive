@@ -1,14 +1,16 @@
-import { ElementRef, OnInit, AfterViewInit, EventEmitter, OnDestroy } from '@angular/core';
-export declare class ViewMoreDirective implements OnInit, AfterViewInit, OnDestroy {
+import { ElementRef, OnInit, EventEmitter, OnDestroy, AfterViewChecked, SimpleChanges } from '@angular/core';
+export declare class ViewMoreDirective implements OnInit, AfterViewChecked, OnDestroy {
     private elRef;
     private element;
     viewHeight: number;
     showMore: EventEmitter<boolean>;
     toggleShowMore: boolean;
     actualHeight: number;
+    private isInsertedViewMoreBtn;
     constructor(elRef: ElementRef);
+    ngOnChanges(changes: SimpleChanges): void;
     ngOnInit(): void;
-    ngAfterViewInit(): void;
+    ngAfterViewChecked(): void;
     toggleEventOnViewMore(element: HTMLElement): void;
     ngOnDestroy(): void;
 }

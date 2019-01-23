@@ -1,16 +1,26 @@
 {
   "name": "view-more-directive",
-  "version": "0.0.0",
-  "license": "MIT",
+  "version": "1.0.0-ng5",
+  "author": "Vaibhav Patil",
+  "license": "GPL-3.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "packagr": "ng-packagr -p ng-package.json"
   },
-  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thevaibhavpatil/view-more.directive.git"
+  },
+  "homepage": "https://github.com/thevaibhavpatil/view-more.directive",
+  "bugs": {
+    "url": "https://github.com/thevaibhavpatil/view-more.directive/issues"
+  },
+  "private": false,
   "dependencies": {
     "@angular/animations": "^5.2.0",
     "@angular/common": "^5.2.0",
@@ -40,6 +50,7 @@
     "karma-coverage-istanbul-reporter": "^1.2.1",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "ng-packagr": "1.0.1",
     "protractor": "~5.1.2",
     "ts-node": "~4.1.0",
     "tslint": "~5.9.1",

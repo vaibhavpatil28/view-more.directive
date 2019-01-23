@@ -1,6 +1,6 @@
 {
-  "name": "view-more-directive",
-  "version": "1.0.4-ng5",
+  "name": "view-more",
+  "version": "1.0.0",
   "author": "Vaibhav Patil",
   "license": "GPL-3.0",
   "scripts": {

@@ -86,7 +86,9 @@ export class ViewMoreDirective {
      * @return {?}
      */
     ngOnDestroy() {
-        document.getElementById('style_view_more').remove();
+        if (document.getElementById('style_view_more')) {
+            document.getElementById('style_view_more').remove();
+        }
     }
 }
 ViewMoreDirective.decorators = [

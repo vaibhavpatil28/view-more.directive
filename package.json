@@ -1,6 +1,6 @@
 {
   "name": "view-more-directive",
-  "version": "1.0.3-ng5",
+  "version": "1.0.4-ng5",
   "author": "Vaibhav Patil",
   "license": "GPL-3.0",
   "scripts": {
@@ -22,7 +22,6 @@
   },
   "private": false,
   "dependencies": {
-    "@angular/animations": "^5.2.0",
     "@angular/common": "^5.2.0",
     "@angular/compiler": "^5.2.0",
     "@angular/core": "^5.2.0",

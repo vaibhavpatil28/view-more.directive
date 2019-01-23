@@ -77,6 +77,8 @@ export class ViewMoreDirective implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   ngOnDestroy() {
-    document.getElementById('style_view_more').remove();
+    if (document.getElementById('style_view_more')) {
+      document.getElementById('style_view_more').remove();
+    }
   }
 }

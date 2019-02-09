@@ -1,4 +1,5 @@
 import { Directive, ElementRef, OnInit, Output, Input, EventEmitter, OnDestroy, AfterViewChecked, SimpleChanges } from '@angular/core';
+import { ViewMoreService } from './view-more.service';
 
 @Directive({
   selector: '[view-more]'
@@ -10,7 +11,10 @@ export class ViewMoreDirective implements OnInit, AfterViewChecked, OnDestroy {
   toggleShowMore = false;
   actualHeight: number;
   private isInsertedViewMoreBtn = false;
-  constructor(private elRef: ElementRef) {
+  repeatedStructure: NodeListOf<Element>;
+  viewRepeatedCount: number;
+  elementIDValue: any;
+  constructor(private elRef: ElementRef, private viewMoreService: ViewMoreService) {
     //elRef will get a reference to the element where
     //the directive is placed
     this.element = elRef.nativeElement;
@@ -20,6 +24,25 @@ export class ViewMoreDirective implements OnInit, AfterViewChecked, OnDestroy {
   }
   ngOnInit() {
     console.log('height equal', this.viewHeight, this.element.offsetHeight);
+    this.repeatedStructure = document.querySelectorAll('[view-more]');
+    if (!!this.repeatedStructure && this.repeatedStructure.length > 0) {
+      this.viewRepeatedCount = this.repeatedStructure.length;
+      this.viewMoreService.classUniqueCount = this.viewRepeatedCount
+      console.log('this.viewRepeatedCount', this.viewRepeatedCount);
+      // this.repeatedStructure.forEach((element, index) => {
+       
+      // })
+      for (let index = 0; index < this.repeatedStructure.length; index++) {
+        this.elementIDValue = this.repeatedStructure[index].getAttribute('id');
+        console.log('this.elementIDValue', this.elementIDValue);
+        if (!this.elementIDValue) {
+          this.repeatedStructure[index].setAttribute(`id`, `${index+1}`);
+        }
+        
+      }
+
+    }
+    console.log('no of elements', document.querySelectorAll('[view-more]'));
   }
   ngAfterViewChecked() {
     this.actualHeight = this.element.offsetHeight + 10;
@@ -33,10 +56,10 @@ export class ViewMoreDirective implements OnInit, AfterViewChecked, OnDestroy {
       span.appendChild(textNode);
       para.appendChild(span);
       para.setAttribute(`style`, `text-align: right;`);
-      span.setAttribute(`id`, `text_view`);
+      span.setAttribute(`id`, `text_view_${this.elementIDValue}`);
       span.setAttribute('style', 'cursor:pointer;')
       this.element.parentNode.insertBefore(para, this.element.nextSibling)
-      this.toggleEventOnViewMore(span);
+      this.toggleEventOnViewMore( document.getElementById(`text_view_${this.elementIDValue}`));
       this.isInsertedViewMoreBtn = true;
     }
   }
@@ -51,7 +74,7 @@ export class ViewMoreDirective implements OnInit, AfterViewChecked, OnDestroy {
     let createdStyleTag: HTMLStyleElement;
     createdStyleTag = document.createElement("style");
     createdStyleTag.setAttribute(`id`, `style_view_more`);
-    createdStyleTag.textContent = `.view_more {
+    createdStyleTag.textContent = `.view_more_${this.elementIDValue} {
       height: ${this.actualHeight }px !important;
     }  
 `;
@@ -59,17 +82,18 @@ export class ViewMoreDirective implements OnInit, AfterViewChecked, OnDestroy {
     // document.body.appendChild(createdStyleTag);
     this.element.appendChild(createdStyleTag);
     element.addEventListener('click', () => {
-
+      console.log('element',element);
+      
       if (this.toggleShowMore) {
         console.log('viewless');
-        this.element.classList.remove("view_more");
-        document.getElementById('text_view').innerHTML = 'view more...';
+        this.element.classList.remove(`view_more_${this.elementIDValue}`);
+        document.getElementById(`text_view_${this.elementIDValue}`).innerHTML = 'view more...';
         this.toggleShowMore = !this.toggleShowMore;
         this.showMore.emit(false);
       } else {
         console.log('viewmore');
-        document.getElementById('text_view').innerHTML = 'view less...';
-        this.element.classList.add("view_more");
+        document.getElementById(`text_view_${this.elementIDValue}`).innerHTML = 'view less...';
+        this.element.classList.add(`view_more_${this.elementIDValue}`);
         this.toggleShowMore = !this.toggleShowMore;
         this.showMore.emit(true);
       }

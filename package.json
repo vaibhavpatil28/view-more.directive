@@ -1,6 +1,6 @@
 {
   "name": "view-more",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "author": "Vaibhav Patil",
   "license": "GPL-3.0",
   "scripts": {
@@ -20,6 +20,14 @@
   "bugs": {
     "url": "https://github.com/thevaibhavpatil/view-more.directive/issues"
   },
+  "keywords": [
+    "angular",
+    "view",
+    "more",
+    "read",
+    "less",
+    "directive"
+  ],
   "private": false,
   "dependencies": {
     "@angular/common": "^5.2.0",

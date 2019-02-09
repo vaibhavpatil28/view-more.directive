@@ -1,6 +1,65 @@
-import { Directive, ElementRef, Output, Input, EventEmitter } from '@angular/core';
-import { ViewMoreService } from './view-more.service';
-export class ViewMoreDirective {
+import { BrowserModule } from '@angular/platform-browser';
+import { Component, Directive, ElementRef, EventEmitter, Injectable, Input, NgModule, Output } from '@angular/core';
+
+class AppComponent {
+    constructor() {
+        this.title = 'app';
+    }
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    showMore(event) {
+        console.log('event', event);
+    }
+}
+AppComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'app-root',
+                template: `
+    <div class="container">
+      <div class="row">
+        <div class="col-6" style="width:50%;">
+       
+          
+              <p view-more viewHeight="55" (showMore)="showMore($event)">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vitae risus vel erat malesuada viverra non nec velit. Fusce varius eleifend augue in tincidunt. Integer bibendum risus nulla, et consequat lorem aliquet quis. Integer dictum varius orci ut cursus. Nam et commodo neque. Cras maximus commodo tincidunt. Suspendisse tempus sit amet neque quis tempus. Curabitur posuere lectus ex, sed pharetra tortor iaculis at. Aenean tellus tellus, tincidunt a tristique non, porttitor eu ipsum. Aliquam erat volutpat. Suspendisse potenti. Integer vehicula ligula nec lectus pharetra, et vestibulum turpis gravida. Donec vitae dui diam.
+              </p>
+               <p view-more viewHeight="55" (showMore)="showMore($event)">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vitae risus vel erat malesuada viverra non nec velit. Fusce varius eleifend augue in tincidunt. Integer bibendum risus nulla, et consequat lorem aliquet quis. Integer dictum varius orci ut cursus. Nam et commodo neque. Cras maximus commodo tincidunt. Suspendisse tempus sit amet neque quis tempus. Curabitur posuere lectus ex, sed pharetra tortor iaculis at. Aenean tellus tellus, tincidunt a tristique non, porttitor eu ipsum. Aliquam erat volutpat. Suspendisse potenti. Integer vehicula ligula nec lectus pharetra, et vestibulum turpis gravida. Donec vitae dui diam.
+          
+                Nam accumsan urna placerat facilisis sagittis. Proin sit amet consequat tellus. Nam molestie at risus vitae tristique. Phasellus aliquet pharetra molestie. Duis hendrerit metus et viverra congue. Sed eu mauris nec ipsum ullamcorper pharetra. Phasellus quis lorem malesuada odio placerat blandit. Morbi aliquam bibendum felis, sed placerat massa ullamcorper eget. Nam aliquet tempus orci sit amet tempor. Etiam massa magna, pulvinar vel libero in, cursus eleifend est. Quisque fringilla blandit condimentum. Nulla elit dui, fermentum vitae turpis eu, mattis fringilla dui. Donec luctus suscipit nunc vitae elementum. Integer vel euismod turpis. Suspendisse eu faucibus purus.
+            
+                Curabitur sodales enim ac sollicitudin fermentum. Donec non mauris at nisi tempus dapibus nec in justo. Mauris vel mi sollicitudin, ornare nibh eget, cursus augue. Vivamus tristique enim vitae molestie placerat. Curabitur pretium tortor ut neque viverra, a dapibus turpis blandit. Donec ultrices facilisis venenatis. Vivamus auctor nibh eget leo condimentum venenatis. Nulla facilisi. Nulla id neque erat. Ut imperdiet aliquet vulputate. Curabitur erat risus, lacinia vel ornare mattis, porta quis orci. Nam vitae tincidunt nulla. Maecenas mollis laoreet turpis, a lacinia sem feugiat vel. Fusce lobortis libero nec molestie accumsan.
+              </p>
+        </div>
+      </div>
+    </div>
+  `,
+                styles: [`
+
+  `]
+            },] },
+];
+/**
+ * @nocollapse
+ */
+AppComponent.ctorParameters = () => [];
+
+class ViewMoreService {
+    constructor() {
+        this.classUniqueCount = 0;
+    }
+}
+ViewMoreService.decorators = [
+    { type: Injectable },
+];
+/**
+ * @nocollapse
+ */
+ViewMoreService.ctorParameters = () => [];
+
+class ViewMoreDirective {
     /**
      * @param {?} elRef
      * @param {?} viewMoreService
@@ -127,37 +186,35 @@ ViewMoreDirective.propDecorators = {
     'viewHeight': [{ type: Input },],
     'showMore': [{ type: Output },],
 };
-function ViewMoreDirective_tsickle_Closure_declarations() {
-    /** @type {?} */
-    ViewMoreDirective.decorators;
-    /**
-     * @nocollapse
-     * @type {?}
-     */
-    ViewMoreDirective.ctorParameters;
-    /** @type {?} */
-    ViewMoreDirective.propDecorators;
-    /** @type {?} */
-    ViewMoreDirective.prototype.element;
-    /** @type {?} */
-    ViewMoreDirective.prototype.viewHeight;
-    /** @type {?} */
-    ViewMoreDirective.prototype.showMore;
-    /** @type {?} */
-    ViewMoreDirective.prototype.toggleShowMore;
-    /** @type {?} */
-    ViewMoreDirective.prototype.actualHeight;
-    /** @type {?} */
-    ViewMoreDirective.prototype.isInsertedViewMoreBtn;
-    /** @type {?} */
-    ViewMoreDirective.prototype.repeatedStructure;
-    /** @type {?} */
-    ViewMoreDirective.prototype.viewRepeatedCount;
-    /** @type {?} */
-    ViewMoreDirective.prototype.elementIDValue;
-    /** @type {?} */
-    ViewMoreDirective.prototype.elRef;
-    /** @type {?} */
-    ViewMoreDirective.prototype.viewMoreService;
+
+class AppModule {
 }
-//# sourceMappingURL=view-more.directive.js.map
+AppModule.decorators = [
+    { type: NgModule, args: [{
+                declarations: [
+                    AppComponent,
+                    ViewMoreDirective
+                ],
+                imports: [
+                    BrowserModule
+                ],
+                exports: [ViewMoreDirective],
+                providers: [ViewMoreService],
+                bootstrap: [AppComponent]
+            },] },
+];
+/**
+ * @nocollapse
+ */
+AppModule.ctorParameters = () => [];
+
+/*
+ * Public API Surface of view-more-directive
+ */
+
+/**
+ * Generated bundle index. Do not edit.
+ */
+
+export { AppModule as ViewMoreDirectiveModule, AppComponent as ɵa, ViewMoreDirective as ɵb, ViewMoreService as ɵc };
+//# sourceMappingURL=view-more.js.map

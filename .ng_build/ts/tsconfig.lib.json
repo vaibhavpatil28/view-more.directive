@@ -1,8 +1,8 @@
 {
   "angularCompilerOptions": {
     "annotateForClosureCompiler": true,
-    "flatModuleId": "view-more-directive",
-    "flatModuleOutFile": "view-more-directive.js",
+    "flatModuleId": "view-more",
+    "flatModuleOutFile": "view-more.js",
     "skipTemplateCodegen": true,
     "strictMetadataEmit": true
   },

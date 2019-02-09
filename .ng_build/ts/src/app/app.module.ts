@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+// import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 
@@ -13,7 +13,7 @@ import { ViewMoreService } from './view-more.service';
     ViewMoreDirective
   ],
   imports: [
-    BrowserModule
+    // BrowserModule
   ],
   exports:[ViewMoreDirective],
   providers: [ViewMoreService],

@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+// import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { ViewMoreDirective } from './view-more.directive';
@@ -11,9 +11,7 @@ AppModule.decorators = [
                     AppComponent,
                     ViewMoreDirective
                 ],
-                imports: [
-                    BrowserModule
-                ],
+                imports: [],
                 exports: [ViewMoreDirective],
                 providers: [ViewMoreService],
                 bootstrap: [AppComponent]

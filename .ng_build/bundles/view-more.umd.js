@@ -1,8 +1,8 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/platform-browser'), require('@angular/core')) :
-	typeof define === 'function' && define.amd ? define(['exports', '@angular/platform-browser', '@angular/core'], factory) :
-	(factory((global['view-more'] = {}),global.ng.platformBrowser,global.ng.core));
-}(this, (function (exports,platformBrowser,core) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core')) :
+	typeof define === 'function' && define.amd ? define(['exports', '@angular/core'], factory) :
+	(factory((global['view-more'] = {}),global.ng.core));
+}(this, (function (exports,core) { 'use strict';
 
 var AppComponent = /** @class */ (function () {
     function AppComponent() {
@@ -164,6 +164,7 @@ ViewMoreDirective.propDecorators = {
     'viewHeight': [{ type: core.Input },],
     'showMore': [{ type: core.Output },],
 };
+// import { BrowserModule } from '@angular/platform-browser';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -175,9 +176,7 @@ AppModule.decorators = [
                     AppComponent,
                     ViewMoreDirective
                 ],
-                imports: [
-                    platformBrowser.BrowserModule
-                ],
+                imports: [],
                 exports: [ViewMoreDirective],
                 providers: [ViewMoreService],
                 bootstrap: [AppComponent]

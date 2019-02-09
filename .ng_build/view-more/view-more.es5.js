@@ -1,4 +1,3 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { Component, Directive, ElementRef, EventEmitter, Injectable, Input, NgModule, Output } from '@angular/core';
 var AppComponent = /** @class */ (function () {
     function AppComponent() {
@@ -160,6 +159,7 @@ ViewMoreDirective.propDecorators = {
     'viewHeight': [{ type: Input },],
     'showMore': [{ type: Output },],
 };
+// import { BrowserModule } from '@angular/platform-browser';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -171,9 +171,7 @@ AppModule.decorators = [
                     AppComponent,
                     ViewMoreDirective
                 ],
-                imports: [
-                    BrowserModule
-                ],
+                imports: [],
                 exports: [ViewMoreDirective],
                 providers: [ViewMoreService],
                 bootstrap: [AppComponent]
